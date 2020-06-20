@@ -1,0 +1,29 @@
+<svg id="mask_shapes" data-name="mask shapes" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ca941d;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #0c0b3d;
+      }
+
+      .cls-3 {
+        fill: #f63;
+      }
+
+      .cls-4 {
+        fill: #fffdd1;
+      }
+    </style>
+  </defs>
+  <path id="Main_Color" data-name="Main Color" class="cls-1" d="M2,2H255L510,258V511H450V288L225,64H2V2Z"/>
+  <path id="Dark_Color" data-name="Dark Color" class="cls-2" d="M55,67h68L2,188V68H6l5,14H47ZM447,389v68s-12,6.334-17,9v34c3.952,1.708,12.708,4.731,17,7,0.106,2.752-.746,2.314,0,4H326C365.663,471,447,389,447,389Z"/>
+  <path id="Accent_Color" data-name="Accent Color" class="cls-3" d="M510,4V253L261,4H510Z"/>
+  <path id="Colore_riempimento_1" data-name="Colore riempimento 1" class="cls-4" d="M2,511V192L129,66h42l9,16h34l8-15h4C359.066,200.9,445.934,287.769,447,291l-17,8v34l17,10v42L320,511H2Z"/>
+</svg>

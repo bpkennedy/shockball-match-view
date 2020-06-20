@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f63;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #ca941d;
+      }
+
+      .cls-3 {
+        fill: #0c0b3d;
+      }
+
+      .cls-4 {
+        fill: #fffdd1;
+      }
+    </style>
+  </defs>
+  <path id="Accent_Color" data-name="Accent Color" class="cls-1" d="M2,2H319V16H2V2ZM3,499H319q-0.5,5.5-1,11H3V499Z"/>
+  <path id="Main_Color" data-name="Main Color" class="cls-2" d="M451,1h61V512H451V1Z"/>
+  <path id="Dark_Color" data-name="Dark Color" class="cls-3" d="M322,2H447c-0.333,164.317-.667,345.683-1,510H322V2Z"/>
+  <path id="Light_Color" data-name="Light Color" class="cls-4" d="M2,19H319v3c-17.016,6.866-.156-0.053-17,7,1.726,34.97.069,0.666,2,35,15.666,5.333-.666-0.333,16,6V346c0,15.62-.5-0.079-2,96-5,3.333-14.667,9.667-15,10v33c15.578,9.547-.094.585,16,10H2V19Z"/>
+</svg>
