@@ -18,7 +18,7 @@ export default {
 <style lang="scss">
   .master-view {
     width: 600px;
-    height: 450px;
+    height: 463px;
     margin: 0 auto;
     margin-top: 25px;
   }

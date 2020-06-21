@@ -1,0 +1,13 @@
+@import "./_fonts.scss";
+
+$bold-font-family: 'Orbitron-Bold';
+
+.point-counter {
+  font-family: $bold-font-family;
+  font-size: 2rem;
+  text-shadow:
+          -2px -2px 0 #fff,
+          2px -2px 0 #fff,
+          -2px 2px 0 #fff,
+          2px 2px 0 #fff;
+}

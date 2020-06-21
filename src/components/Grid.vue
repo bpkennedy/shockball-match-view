@@ -4,6 +4,8 @@
             <square v-for="(x, xIndex) of 12"
                     :key="`y${yIndex}x${xIndex}`"
                     :definition="squareDefinition(xIndex, yIndex)"
+                    :engine-pos="enginePosition(xIndex, yIndex)"
+                    :real-pos="realPosition(xIndex, yIndex)"
                     :class="gridClasses(xIndex, yIndex)"/>
         </div>
     </div>
@@ -79,7 +81,6 @@
                     12: {
                         class: 'fieldCenter',
                         texture: 'field_center_texture',
-                        color: 'field_center_colors',
                     },
                 },
                 gridSquares: [
@@ -96,10 +97,14 @@
             }
         },
         methods: {
+            enginePosition(xIndex, yIndex) {
+                return `e${xIndex - 1}-${Math.abs(yIndex - 9) - 3}`
+            },
+            realPosition(xIndex, yIndex) {
+                return `r${xIndex}-${Math.abs(yIndex - 8)}`
+            },
             gridClasses(xIndex, yIndex) {
-                const enginePosition = `e${xIndex - 1},${Math.abs(yIndex - 9) - 3}`
-                const realPosition = `r${xIndex},${Math.abs(yIndex - 8)}`
-                return `${enginePosition} ${realPosition}`
+                return `${this.enginePosition(xIndex, yIndex)} ${this.realPosition(xIndex, yIndex)}`
             },
             squareDefinition(xIndex, yIndex) {
                 const reversedArray = this.gridSquares.slice().reverse()

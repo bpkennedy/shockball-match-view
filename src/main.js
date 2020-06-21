@@ -28,7 +28,7 @@ const configurationData ={
       accent: '#000000',
     },
     benchBannerUrls: [ '', '', '', '', '' ],
-    logoUrl: 'https://www.epicentrofestival.com/wp-content/uploads/2020/02/epicentrofestival-anakin-skywalker-star-wars-art-jedi-sports-team-rebel-alliance-logo-m89es4p0qo-720x512.jpg',
+    logoUrl: 'https://i.pinimg.com/originals/51/af/ed/51afedb0d252e3429b9564dc673699e7.png',
   }
 }
 
