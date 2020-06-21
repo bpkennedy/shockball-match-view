@@ -6,7 +6,10 @@ Vue.use(Vuex)
 function builder(data) {
     return new Vuex.Store({
         state: {
-            configuration: data,
+            configuration: data.configuration,
+            homeTeamDetails: data.homeTeamDetails,
+            awayTeamDetails: data.awayTeamDetails,
+            matchData: data.matchData,
         },
         mutations: {},
         actions: {},
