@@ -9,7 +9,7 @@ export const configuration = {
             accent: '#111111',
         },
         logoUrl: 'https://i.pinimg.com/originals/e1/68/be/e168be01dd5117a08500c8deb30261e2.png',
-        benchBannerUrls: [ '', '', '', '', '' ],
+        benchBannerUrl: 'https://www.badWebsite.com/someBadImage.png',
         fieldImageUrl: 'https://wallup.net/wp-content/uploads/2016/01/91038-nebula-space-748x468.jpg',
     },
     awayTeam: {
@@ -20,7 +20,7 @@ export const configuration = {
             light: '#292929',
             accent: '#000000',
         },
-        benchBannerUrls: [ '', '', '', '', '' ],
+        benchBannerUrl: 'https://www.alliancesoccerclub.com/wp-content/uploads/sites/746/2019/12/Travel-combined-1-scaled.png',
         logoUrl: 'https://i.pinimg.com/originals/51/af/ed/51afedb0d252e3429b9564dc673699e7.png',
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="master-view">
     <div v-if="mode === LOADING_MODE" class="overlay intro-font">
-      Loading Match...
+      Loading Match . . .
     </div>
     <div v-if="mode === INTRO_MODE" class="overlay intro-font">
       <div class="homeTeam">
@@ -22,11 +22,8 @@
 import gsap from 'gsap'
 import Vue from 'vue'
 import Game from '@/components/Game.vue'
-import {mapState} from "vuex";
-
-const LOADING_MODE = 'LOADING_MODE'
-const INTRO_MODE = 'INTRO_MODE'
-const PLAY_MODE = 'PLAY_MODE'
+import {mapState} from 'vuex'
+import {LOADING_MODE, INTRO_MODE, PLAY_MODE} from '../constants'
 
 export default {
   name: 'MasterView',
@@ -35,15 +32,14 @@ export default {
   },
   data() {
     return {
-      mode: LOADING_MODE,
       LOADING_MODE,
       INTRO_MODE,
-      PLAY_MODE
+      PLAY_MODE,
+      mode: LOADING_MODE,
     }
   },
   methods: {
     finishedIntro() {
-      console.log('finished Intro animations')
       Vue.set(this, 'mode', PLAY_MODE)
     }
   },
@@ -75,7 +71,7 @@ export default {
 <style lang="scss">
   .master-view {
     width: 600px;
-    height: 463px;
+    height: 450px;
     margin: 0 auto;
     margin-top: 25px;
     position: relative;
@@ -87,13 +83,12 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #000000;
-    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
   }
   .homeTeam, .awayTeam {
     display: flex;

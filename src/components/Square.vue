@@ -3,30 +3,45 @@
          :class="definition.class"
          :style="{ backgroundImage: `${squareTexture}${squareColor}` }"
     >
-        <div v-if="realPos === TOP_LOGO_REAL_LOCATION" class="homeLogo">
-            <img :src="this.configuration.homeTeam.logoUrl" />
-        </div>
-        <div v-if="realPos === BOTTOM_LOGO_REAL_LOCATION" class="awayLogo">
-            <img :src="this.configuration.awayTeam.logoUrl" />
-        </div>
-        <div v-if="realPos === TOP_POINT_LOCATION" class="homePoints point-counter">
-            0
-        </div>
-        <div v-if="realPos === BOTTOM_POINT_LOCATION" class="awayPoints point-counter">
-            1
-        </div>
+
+        <team-logo v-if="realPos === TOP_LOGO_REAL_LOCATION"
+                   :logo-url="configuration.homeTeam.logoUrl"
+                   :side="HOME_SIDE"/>
+        <team-logo v-if="realPos === BOTTOM_LOGO_REAL_LOCATION"
+                   :logo-url="configuration.awayTeam.logoUrl"
+                   :side="AWAY_SIDE"/>
+
+        <team-banner v-if="realPos === TOP_BANNER_LOCATION"
+                     :team-config="this.configuration.homeTeam"
+                     :side="HOME_SIDE"/>
+        <team-banner v-if="realPos === BOTTOM_BANNER_LOCATION"
+                     :team-config="this.configuration.awayTeam"
+                     :side="AWAY_SIDE"/>
+
+        <team-points v-if="realPos === TOP_POINT_LOCATION" :side="HOME_SIDE"/>
+        <team-points v-if="realPos === BOTTOM_POINT_LOCATION" :side="AWAY_SIDE"/>
     </div>
 </template>
 
 <script>
-    import {mapState} from "vuex";
-    const TOP_LOGO_REAL_LOCATION = 'r2-7'
-    const TOP_POINT_LOCATION = 'r8-7'
-    const BOTTOM_LOGO_REAL_LOCATION = 'r3-1'
-    const BOTTOM_POINT_LOCATION = 'r9-1'
+    import {mapState} from "vuex"
+    import TeamBanner from "./TeamBanner"
+    import TeamLogo from "./TeamLogo"
+    import TeamPoints from "./TeamPoints"
+    import {
+        TOP_BANNER_LOCATION,
+        TOP_LOGO_REAL_LOCATION,
+        TOP_POINT_LOCATION,
+        BOTTOM_BANNER_LOCATION,
+        BOTTOM_LOGO_REAL_LOCATION,
+        BOTTOM_POINT_LOCATION,
+        HOME_SIDE,
+        AWAY_SIDE,
+    } from '../constants'
 
     export default {
         name: "Square",
+        components: {TeamBanner, TeamLogo, TeamPoints},
         props: {
             definition: {
                 type: Object,
@@ -44,9 +59,13 @@
         data() {
             return {
                 TOP_LOGO_REAL_LOCATION,
-                BOTTOM_LOGO_REAL_LOCATION,
+                TOP_BANNER_LOCATION,
                 TOP_POINT_LOCATION,
+                BOTTOM_LOGO_REAL_LOCATION,
+                BOTTOM_BANNER_LOCATION,
                 BOTTOM_POINT_LOCATION,
+                HOME_SIDE,
+                AWAY_SIDE,
             }
         },
         computed: {
@@ -68,16 +87,18 @@
 
 <style lang="scss" scoped>
     .square {
-        width: 100%;
         min-width: 50px;
-        height: 100%;
+        max-width: 50px;
         min-height: 50px;
+        max-height: 50px;
         flex: 1;
         background-size: cover;
         background-blend-mode: multiply;
         display: flex;
         align-items: center;
         justify-items: center;
+        position: relative;
+        z-index: 0;
     }
 
     .floor {
@@ -87,7 +108,6 @@
 
     }
     .topCorridor {
-
     }
     .bottomCorridor {
         transform: rotate(180deg);
@@ -120,24 +140,8 @@
 
     }
 
-    .homeLogo, .awayLogo {
-        flex: 1;
-        img {
-            height: 100%;
-            box-sizing: border-box;
-            max-width: 100%;
-            max-height: 100%;
-            width: 100%;
-        }
-    }
-    .awayLogo {
-        transform: rotate(180deg);
-    }
-
-    .homePoints, .awayPoints {
-        flex: 1;
-    }
-    .awayPoints {
-        transform: rotate(180deg);
+    .topCorridor.r3-7, .bottomCorridor.r4-1 {
+        /*For stacking of team banners - because banner transform makes stacking order lose z-index*/
+        z-index: 1;
     }
 </style>
