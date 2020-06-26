@@ -12,7 +12,8 @@
 </template>
 
 <script>
-    import Square from "./Square";
+    import Square from './Square'
+
     export default {
         name: "Grid",
         components: {Square},

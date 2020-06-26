@@ -87,10 +87,10 @@
 
 <style lang="scss" scoped>
     .square {
-        min-width: 50px;
-        max-width: 50px;
-        min-height: 50px;
-        max-height: 50px;
+        min-width: var(--square-width);
+        max-width: var(--square-width);
+        min-height: var(--square-height);
+        max-height: var(--square-height);
         flex: 1;
         background-size: cover;
         background-blend-mode: multiply;

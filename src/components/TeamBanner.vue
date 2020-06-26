@@ -40,14 +40,14 @@
 
 <style lang="scss">
     .top-banner, .bottom-banner {
-        width: 50px;
+        width: var(--square-width);
         height: 100%;
         display: flex;
         align-items: center;
         justify-items: center;
         img {
             max-width: calc(100% * 5);
-            max-height: 50px;
+            max-height: var(--square-height);
         }
     }
     .top-banner {

@@ -2,6 +2,9 @@
 
 $bold-font-family: 'Orbitron-Bold';
 $default-text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+$tiny-text-shadow: -.055em -.055em 0 #fff, .055em -.055em 0 #fff, -.055em .055em 0 #fff, .055em .055em 0 #fff;
+$fatigue-color: #FFCC33;
+$aggression-color: #FF0201;
 
 .point-counter {
   font-family: $bold-font-family;

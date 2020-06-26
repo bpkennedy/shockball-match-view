@@ -15,7 +15,7 @@ export const configuration = {
     awayTeam: {
         name: 'Republic Rebels',
         colors: {
-            main: '#343434',
+            main: '#F26626',
             dark: '#646476',
             light: '#292929',
             accent: '#000000',
@@ -28,10 +28,12 @@ export const configuration = {
 export const homeTeamDetails = {
     players: [
         {
+            id: 1,
             num: 10,
             name: 'Jax Starblade',
             image: 'https://custom.swcombine.com/static/1/1320391-100-100.jpg?1577367133',
             fatigue: 14,
+            aggression: 40,
             modifier: 0,
         }
     ]
@@ -40,10 +42,12 @@ export const homeTeamDetails = {
 export const awayTeamDetails = {
     players: [
         {
+            id: 2,
             num: 3,
             name: 'Tholme So',
             image: 'http://custom.swcombine.com/static/1/1305198-100-100.jpg?1524199193',
-            fatigue: 10,
+            fatigue: 50,
+            aggression: 80,
             modifier: 0,
         }
     ]

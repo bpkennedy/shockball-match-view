@@ -14,16 +14,16 @@
         <div class="name">{{configuration.awayTeam.name}}</div>
       </div>
     </div>
-    <game />
+    <game :style="dynamicCssVariables"/>
   </div>
 </template>
 
 <script>
 import gsap from 'gsap'
-import Vue from 'vue'
 import Game from '@/components/Game.vue'
 import {mapState} from 'vuex'
 import {LOADING_MODE, INTRO_MODE, PLAY_MODE} from '../constants'
+import {SET_GAME_MODE_ACTION} from "../store";
 
 export default {
   name: 'MasterView',
@@ -35,16 +35,29 @@ export default {
       LOADING_MODE,
       INTRO_MODE,
       PLAY_MODE,
-      mode: LOADING_MODE,
     }
   },
   methods: {
     finishedIntro() {
-      Vue.set(this, 'mode', PLAY_MODE)
+      this.$store.dispatch(SET_GAME_MODE_ACTION, PLAY_MODE)
     }
   },
   computed: {
-    ...mapState(['configuration']),
+    ...mapState(['configuration', 'mode']),
+    dynamicCssVariables() {
+      return {
+        '--square-width': '50px',
+        '--square-height': '50px',
+        '--home-main-color': this.configuration.homeTeam.colors.main,
+        '--home-dark-color': this.configuration.homeTeam.colors.dark,
+        '--home-light-color': this.configuration.homeTeam.colors.light,
+        '--home-accent-color': this.configuration.homeTeam.colors.accent,
+        '--away-main-color': this.configuration.awayTeam.colors.main,
+        '--away-dark-color': this.configuration.awayTeam.colors.dark,
+        '--away-light-color': this.configuration.awayTeam.colors.light,
+        '--away-accent-color': this.configuration.awayTeam.colors.accent,
+      }
+    }
   },
   watch: {
     mode: function (newVal, oldVal) {
@@ -62,7 +75,7 @@ export default {
   },
   created() {
     setTimeout(() => {
-      Vue.set(this, 'mode', INTRO_MODE)
+      this.$store.dispatch(SET_GAME_MODE_ACTION, INTRO_MODE)
     }, 3000)
   }
 }
