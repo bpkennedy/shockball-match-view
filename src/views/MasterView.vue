@@ -1,5 +1,5 @@
 <template>
-  <div class="master-view">
+  <div class="master-view" :style="dynamicCssVariables">
     <div v-if="mode === LOADING_MODE" class="overlay intro-font">
       Loading Match . . .
     </div>
@@ -14,7 +14,7 @@
         <div class="name">{{configuration.awayTeam.name}}</div>
       </div>
     </div>
-    <game :style="dynamicCssVariables"/>
+    <game/>
   </div>
 </template>
 
@@ -83,8 +83,8 @@ export default {
 
 <style lang="scss">
   .master-view {
-    width: 600px;
-    height: 450px;
+    width: calc(var(--square-width) * 12);
+    height: calc(var(--square-height) * 9);
     margin: 0 auto;
     margin-top: 25px;
     position: relative;
