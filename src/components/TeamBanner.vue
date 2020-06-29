@@ -1,7 +1,7 @@
 <template>
     <div :class="{'top-banner': isHomeTeam, 'bottom-banner': !isHomeTeam}">
-        <img v-if="isValidBanner" :src="teamConfig.benchBannerUrl" @error="errorLoadingBanner"/>
-        <div v-if="!isValidBanner" class="team-font name-fallback">{{teamConfig.name}}</div>
+        <img v-if="isValidBanner" :src="teamConfig.team_banner" @error="errorLoadingBanner"/>
+        <div v-if="!isValidBanner" class="team-font name-fallback">{{teamConfig.place}} {{teamConfig.name}}</div>
     </div>
 </template>
 <script>

@@ -1,8 +1,8 @@
 <template>
-    <div class="player-token square-size">
-        <img :src="player.image" :class="{'home-player': isHomeTeam, 'away-player': !isHomeTeam}"/>
+    <div class="player-token square-size" :class="`p${player.number}`">
+        <img :src="player.avatar" :class="{'home-player': player.side === HOME_SIDE, 'away-player': player.side === AWAY_SIDE}"/>
         <loading-progress
-                :progress="aggression"
+                :progress="aggressiveness"
                 :indeterminate="false"
                 :counter-clockwise="false"
                 :hide-background="true"
@@ -20,14 +20,14 @@
                 class="square-size fatigue"
                 :class="fatigueClasses"
         />
-        <div class="player-number" :class="numberClasses">{{player.num}}</div>
+        <div class="player-number" :class="numberClasses">{{player.number}}</div>
         <div class="modifier"></div>
     </div>
 </template>
 
 <script>
     import Vue from 'vue'
-    import {HOME_SIDE} from "../constants";
+    import {AWAY_SIDE, HOME_SIDE} from "../constants";
 
     export default {
         name: "PlayerToken",
@@ -36,21 +36,16 @@
                 type: Object,
                 required: true,
             },
-            side: {
-                type: String,
-                required: true
-            }
         },
         data() {
             return {
                 fatigue: null,
-                aggression: null,
+                aggressiveness: null,
+                HOME_SIDE,
+                AWAY_SIDE,
             }
         },
         computed: {
-            isHomeTeam() {
-                return this.side === HOME_SIDE
-            },
             fatigueClasses() {
                 return {
                     'low': this.fatigue < .33,
@@ -60,19 +55,26 @@
             },
             numberClasses() {
                 return {
-                    'home-background': this.isHomeTeam,
-                    'away-background': !this.isHomeTeam,
+                    'home-background': this.player.side === HOME_SIDE,
+                    'away-background': this.player.side === AWAY_SIDE,
                 }
             }
         },
         created() {
             Vue.set(this, 'fatigue', this.player.fatigue / 100)
-            Vue.set(this, 'aggression', this.player.aggression / 100)
+            Vue.set(this, 'aggressiveness', this.player.aggressiveness / 100)
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    .player-token {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+    }
     .square-size {
         min-width: var(--square-width);
         max-width: var(--square-width);
@@ -108,12 +110,6 @@
     }
     .away-player {
         border: 2px solid var(--away-main-color);
-    }
-    .player-token {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     img {
         width: calc(var(--square-width) - .75rem);

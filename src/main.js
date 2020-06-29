@@ -4,7 +4,7 @@ import VueProgress from 'vue-progress-path'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import {configuration, homeTeamDetails, awayTeamDetails, matchData} from "./fakeData";
+import {teams, players, matchData} from "./fakeData";
 
 Vue.config.productionTip = false
 Vue.use(VueProgress)
@@ -12,9 +12,8 @@ Vue.use(VueProgress)
 new Vue({
   router,
   store: store({
-    configuration,
-    homeTeamDetails,
-    awayTeamDetails,
+    teams,
+    players,
     matchData
   }),
   render: h => h(App)

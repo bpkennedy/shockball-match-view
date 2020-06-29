@@ -1,20 +1,20 @@
 <template>
   <div class="game" :style="{
-    backgroundImage: `url('${this.configuration.homeTeam.fieldImageUrl}')`,
+    backgroundImage: `url('${teams.home_team.field_background}')`,
     backgroundSize: 'cover'
   }">
-    <div class="floor">
+    <div id="testy" class="floor">
       <grid/>
-      <div class="players">
-        <player-token v-for="player of homeTeamDetails.players"
+      <div class="home-players">
+        <player-token v-for="player of homePlayers"
                       :key="player.id"
                       :player="player"
-                      :side="HOME_SIDE"
         />
-        <player-token v-for="player of awayTeamDetails.players"
+      </div>
+      <div class="away-players">
+        <player-token v-for="player of awayPlayers"
                       :key="player.id"
                       :player="player"
-                      :side="AWAY_SIDE"
         />
       </div>
     </div>
@@ -22,23 +22,73 @@
 </template>
 
 <script>
+  import gsap from 'gsap'
   import {mapState} from 'vuex'
-  import { HOME_SIDE, AWAY_SIDE } from '../constants'
-  import Grid from "./Grid";
+  import {HOME_SIDE, AWAY_SIDE, PLAY_MODE} from '../constants'
+  import Grid from "./Grid"
   import PlayerToken from './PlayerToken'
+  import { PLAYERS_GETTER } from "../store"
 
   export default {
     name: 'Game',
     components: {Grid,PlayerToken},
-    data() {
-      return {
-        HOME_SIDE,
-        AWAY_SIDE
+    methods: {
+      playerClass(player) {
+        return `p${player.number}`
+      },
+      async goToBoardPosition(player, enginePosX, enginePosY, duration) {
+        const realPosX = enginePosX + 1
+        const realPosY = enginePosY + 2
+        await this.goToRealPosition(player, realPosX, realPosY, duration)
+      },
+      async goToRealPosition(player, realPosX, realPosY, duration = 1) {
+        const gsapX = realPosX * 50
+        const gsapY = realPosY * 50 * -1
+        await gsap.to(`.${this.playerClass(player)}`, {x: gsapX, y: gsapY, duration})
+      },
+      async enterToHomeCorridor(player) {
+        await this.goToRealPosition(player, 1, 7)
+        await this.goToRealPosition(player, 5, 7)
+        const initialPosition = this.matchData[0].Positions.find(p => p.num === player.number)
+        if (initialPosition) {
+          await this.goToBoardPosition(player, initialPosition.x, initialPosition.y)
+        }
+      },
+      async enterToAwayCorridor(player) {
+        await this.goToRealPosition(player, 2, 1)
+        await this.goToRealPosition(player, 6, 1)
+        const initialPosition = this.matchData[0].Positions.find(p => p.num === player.number)
+        if (initialPosition) {
+          await this.goToBoardPosition(player, initialPosition.x, initialPosition.y)
+        }
+      },
+      async enterPlayers() {
+        for (const player of this.homePlayers) {
+          await this.enterToHomeCorridor(player)
+        }
+        for (const player of this.awayPlayers) {
+          await this.enterToAwayCorridor(player)
+        }
       }
     },
     computed: {
-      ...mapState(['configuration', 'homeTeamDetails', 'awayTeamDetails']),
+      ...mapState(['teams', 'players', 'matchData', 'mode']),
+      homePlayers() {
+        const test = this.$store.getters[PLAYERS_GETTER](HOME_SIDE)
+        console.log(test)
+        return test
+      },
+      awayPlayers() {
+        return this.$store.getters[PLAYERS_GETTER](AWAY_SIDE)
+      }
     },
+    watch: {
+      mode: function(newMode, oldMode) {
+        if (newMode === PLAY_MODE) {
+          this.enterPlayers()
+        }
+      }
+    }
   }
 </script>
 
@@ -54,10 +104,10 @@
     height: 100%;
   }
 
-  .players {
+  .home-players, .away-players {
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     min-width: var(--square-width);
     max-width: var(--square-width);
     min-height: var(--square-height);

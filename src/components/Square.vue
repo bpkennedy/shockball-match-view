@@ -5,17 +5,17 @@
     >
 
         <team-logo v-if="realPos === TOP_LOGO_REAL_LOCATION"
-                   :logo-url="configuration.homeTeam.logoUrl"
+                   :logo-url="teams.home_team.team_logo"
                    :side="HOME_SIDE"/>
         <team-logo v-if="realPos === BOTTOM_LOGO_REAL_LOCATION"
-                   :logo-url="configuration.awayTeam.logoUrl"
+                   :logo-url="teams.away_team.team_logo"
                    :side="AWAY_SIDE"/>
 
         <team-banner v-if="realPos === TOP_BANNER_LOCATION"
-                     :team-config="this.configuration.homeTeam"
+                     :team-config="teams.home_team"
                      :side="HOME_SIDE"/>
         <team-banner v-if="realPos === BOTTOM_BANNER_LOCATION"
-                     :team-config="this.configuration.awayTeam"
+                     :team-config="teams.away_team"
                      :side="AWAY_SIDE"/>
 
         <team-points v-if="realPos === TOP_POINT_LOCATION" :side="HOME_SIDE"/>
@@ -69,7 +69,7 @@
             }
         },
         computed: {
-            ...mapState(['configuration']),
+            ...mapState(['teams']),
             squareTexture() {
                 return `url(${require(`@/assets/${this.definition.texture}.png`)})`
             },

@@ -6,14 +6,14 @@ Vue.use(Vuex)
 
 export const SET_GAME_MODE_ACTION = 'SET_GAME_MODE_ACTION'
 const SET_GAME_MODE_MUTATION = 'SET_GAME_MODE_MUTATION'
+export const PLAYERS_GETTER = 'PLAYERS_GETTER'
 
-function builder(data) {
+function builder({ teams, players, matchData}) {
     return new Vuex.Store({
         state: {
-            configuration: data.configuration,
-            homeTeamDetails: data.homeTeamDetails,
-            awayTeamDetails: data.awayTeamDetails,
-            matchData: data.matchData,
+            teams,
+            players,
+            matchData,
             mode: LOADING_MODE,
         },
         actions: {
@@ -25,6 +25,22 @@ function builder(data) {
             [SET_GAME_MODE_MUTATION](state, mode) {
                 Vue.set(state, 'mode', mode)
             }
+        },
+        getters: {
+            [PLAYERS_GETTER]: state => side => {
+                let players = []
+                const sidePlayerIds = state.teams[side].roster.map(r => r.toString())
+                for (const [key, value] of Object.entries(state.players)) {
+                    if (sidePlayerIds.includes(key)) {
+                        players.push({
+                            ...value,
+                            id: key,
+                            side,
+                        })
+                    }
+                }
+                return players
+            },
         },
         modules: {}
     })

@@ -5,13 +5,13 @@
     </div>
     <div v-if="mode === INTRO_MODE" class="overlay intro-font">
       <div class="homeTeam">
-        <div class="logo"><img :src="configuration.homeTeam.logoUrl"/></div>
-        <div class="name">{{configuration.homeTeam.name}}</div>
+        <div class="logo"><img :src="teams.home_team.team_logo"/></div>
+        <div class="name">{{teams.home_team.name}}</div>
       </div>
       <div class="versus">versus</div>
       <div class="awayTeam">
-        <div class="logo"><img :src="configuration.awayTeam.logoUrl"/></div>
-        <div class="name">{{configuration.awayTeam.name}}</div>
+        <div class="logo"><img :src="teams.away_team.team_logo"/></div>
+        <div class="name">{{teams.away_team.name}}</div>
       </div>
     </div>
     <game/>
@@ -43,19 +43,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(['configuration', 'mode']),
+    ...mapState(['teams', 'mode']),
     dynamicCssVariables() {
       return {
         '--square-width': '50px',
         '--square-height': '50px',
-        '--home-main-color': this.configuration.homeTeam.colors.main,
-        '--home-dark-color': this.configuration.homeTeam.colors.dark,
-        '--home-light-color': this.configuration.homeTeam.colors.light,
-        '--home-accent-color': this.configuration.homeTeam.colors.accent,
-        '--away-main-color': this.configuration.awayTeam.colors.main,
-        '--away-dark-color': this.configuration.awayTeam.colors.dark,
-        '--away-light-color': this.configuration.awayTeam.colors.light,
-        '--away-accent-color': this.configuration.awayTeam.colors.accent,
+        '--home-main-color': this.teams.home_team.main_color,
+        '--home-dark-color': this.teams.home_team.dark_color,
+        '--home-light-color': this.teams.home_team.light_color,
+        '--home-accent-color': this.teams.home_team.accent_color,
+        '--away-main-color': this.teams.away_team.main_color,
+        '--away-dark-color': this.teams.away_team.dark_color,
+        '--away-light-color': this.teams.away_team.light_color,
+        '--away-accent-color': this.teams.away_team.accent_color,
       }
     }
   },
@@ -69,14 +69,14 @@ export default {
           introTimeline.to(".versus", {opacity: 1, duration: 3},'-=3');
           introTimeline.to(".overlay", {opacity: 0, duration: 1});
           introTimeline.play()
-        }, 1000)
+        }, 500)
       }
     }
   },
   created() {
     setTimeout(() => {
       this.$store.dispatch(SET_GAME_MODE_ACTION, INTRO_MODE)
-    }, 3000)
+    }, 1000)
   }
 }
 </script>
@@ -87,7 +87,9 @@ export default {
     height: calc(var(--square-height) * 9);
     margin: 0 auto;
     margin-top: 25px;
+    margin-bottom: 25px;
     position: relative;
+    overflow: hidden;
   }
   .overlay {
     position: absolute;
@@ -101,7 +103,7 @@ export default {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    z-index: 2;
+    z-index: 4;
   }
   .homeTeam, .awayTeam {
     display: flex;
