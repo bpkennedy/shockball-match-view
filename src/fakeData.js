@@ -10,7 +10,7 @@ export const teams = {
         "light_color" : "#fff8dc",
         "team_logo" : "https://i.pinimg.com/originals/e1/68/be/e168be01dd5117a08500c8deb30261e2.png",
         "team_banner" : "https://www.badWebsite.com/someBadImage.png",
-        "field_background": "https://wallup.net/wp-content/uploads/2016/01/91038-nebula-space-748x468.jpg",
+        "field_background": "https://digitaladdictsblog.com/wp-content/uploads/2019/01/shutterstock_295846730-1280x720.jpg",
         "roster" : [43, 45, 69, 70],
     },
     "away_team" : {

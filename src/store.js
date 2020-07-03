@@ -4,12 +4,14 @@ import {LOADING_MODE} from './constants'
 
 Vue.use(Vuex)
 
+export let store
+
 export const SET_GAME_MODE_ACTION = 'SET_GAME_MODE_ACTION'
 const SET_GAME_MODE_MUTATION = 'SET_GAME_MODE_MUTATION'
 export const PLAYERS_GETTER = 'PLAYERS_GETTER'
 
 function builder({ teams, players, matchData}) {
-    return new Vuex.Store({
+    store = new Vuex.Store({
         state: {
             teams,
             players,
@@ -44,6 +46,7 @@ function builder({ teams, players, matchData}) {
         },
         modules: {}
     })
+    return store
 }
 
 export default builder
