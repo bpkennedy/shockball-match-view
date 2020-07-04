@@ -22,12 +22,13 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import { enterToAwayCorridor, enterToHomeCorridor } from "../animation";
-  import {HOME_SIDE, AWAY_SIDE, PLAY_MODE} from '../constants'
-  import Grid from "./Grid"
+  import { Howl, Howler } from 'howler'
+  import { mapState } from 'vuex'
+  import { enterToAwayCorridor, enterToHomeCorridor } from '../animation'
+  import { HOME_SIDE, AWAY_SIDE, PLAY_MODE } from '../constants'
+  import Grid from './Grid'
   import PlayerToken from './PlayerToken'
-  import { PLAYERS_GETTER } from "../store"
+  import { PLAYERS_GETTER } from '../store'
 
   export default {
     name: 'Game',
@@ -58,6 +59,12 @@
       mode: function(newMode, oldMode) {
         if (newMode === PLAY_MODE) {
           this.enterPlayers()
+          const crowd1 = new Howl({src: [require('../assets/hockey_001.mp3')]})
+          const whistle = new Howl({src: [require('../assets/whistle_001.mp3')]})
+          crowd1.play()
+          crowd1.on('end', function() {
+            whistle.play()
+          })
         }
       }
     }
