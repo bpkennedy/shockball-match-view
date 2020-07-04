@@ -20,6 +20,21 @@
 
         <team-points v-if="realPos === TOP_POINT_LOCATION" :side="HOME_SIDE"/>
         <team-points v-if="realPos === BOTTOM_POINT_LOCATION" :side="AWAY_SIDE"/>
+
+        <div v-if="realPos === SECTOR_BOTTOM_LEFT_LEFT" class="divider divider-right"></div>
+        <div v-if="realPos === SECTOR_BOTTOM_LEFT_RIGHT" class="divider divider-left"></div>
+        <div v-if="realPos === SECTOR_BOTTOM_RIGHT_LEFT" class="divider divider-right"></div>
+        <div v-if="realPos === SECTOR_BOTTOM_RIGHT_RIGHT" class="divider divider-left"></div>
+        <div v-if="realPos === SECTOR_TOP_LEFT_LEFT" class="divider divider-right"></div>
+        <div v-if="realPos === SECTOR_TOP_LEFT_RIGHT" class="divider divider-left"></div>
+        <div v-if="realPos === SECTOR_TOP_RIGHT_LEFT" class="divider divider-right"></div>
+        <div v-if="realPos === SECTOR_TOP_RIGHT_RIGHT" class="divider divider-left"></div>
+        <div v-if="realPos === SECTOR_T_LEFT_LEFT" class="divider divider-right"></div>
+        <div v-if="realPos === SECTOR_T_LEFT_RIGHT" class="divider divider-t-left"></div>
+        <div v-if="realPos === SECTOR_T_RIGHT_LEFT" class="divider divider-t-right"></div>
+        <div v-if="realPos === SECTOR_T_RIGHT_RIGHT" class="divider divider-left"></div>
+        <div v-if="realPos === SECTOR_CENTER_LEFT" class="divider divider-center"></div>
+        <div v-if="realPos === SECTOR_CENTER_RIGHT" class="divider divider-center"></div>
     </div>
 </template>
 
@@ -37,6 +52,20 @@
         BOTTOM_POINT_LOCATION,
         HOME_SIDE,
         AWAY_SIDE,
+        SECTOR_BOTTOM_LEFT_LEFT,
+        SECTOR_BOTTOM_LEFT_RIGHT,
+        SECTOR_BOTTOM_RIGHT_LEFT,
+        SECTOR_BOTTOM_RIGHT_RIGHT,
+        SECTOR_TOP_LEFT_LEFT,
+        SECTOR_TOP_LEFT_RIGHT,
+        SECTOR_TOP_RIGHT_LEFT,
+        SECTOR_TOP_RIGHT_RIGHT,
+        SECTOR_T_LEFT_LEFT,
+        SECTOR_T_LEFT_RIGHT,
+        SECTOR_T_RIGHT_LEFT,
+        SECTOR_T_RIGHT_RIGHT,
+        SECTOR_CENTER_LEFT,
+        SECTOR_CENTER_RIGHT,
     } from '../constants'
 
     export default {
@@ -66,6 +95,20 @@
                 BOTTOM_POINT_LOCATION,
                 HOME_SIDE,
                 AWAY_SIDE,
+                SECTOR_BOTTOM_LEFT_LEFT,
+                SECTOR_BOTTOM_LEFT_RIGHT,
+                SECTOR_BOTTOM_RIGHT_LEFT,
+                SECTOR_BOTTOM_RIGHT_RIGHT,
+                SECTOR_TOP_LEFT_LEFT,
+                SECTOR_TOP_LEFT_RIGHT,
+                SECTOR_TOP_RIGHT_LEFT,
+                SECTOR_TOP_RIGHT_RIGHT,
+                SECTOR_T_LEFT_LEFT,
+                SECTOR_T_LEFT_RIGHT,
+                SECTOR_T_RIGHT_LEFT,
+                SECTOR_T_RIGHT_RIGHT,
+                SECTOR_CENTER_LEFT,
+                SECTOR_CENTER_RIGHT,
             }
         },
         computed: {
@@ -86,6 +129,36 @@
 </script>
 
 <style lang="scss" scoped>
+    .divider {
+        background-size: cover;
+        background-blend-mode: multiply;
+        min-width: var(--square-width);
+        max-width: var(--square-width);
+        min-height: var(--square-height);
+        max-height: var(--square-height);
+        z-index: 1;
+    }
+    .divider-right {
+        background-image: url('~@/assets/field_center_divider_texture.png'), url('~@/assets/field_center_divider_colors.svg');
+        transform: rotate(90deg);
+    }
+    .divider-left {
+        background-image: url('~@/assets/field_center_divider_texture.png'), url('~@/assets/field_center_divider_colors.svg');
+        transform: rotate(-90deg);
+    }
+    .divider-t-left {
+        background-image: url('~@/assets/field_center_divider_T_texture.png'), url('~@/assets/field_center_divider_T_colors.svg');
+        transform: rotate(-90deg);
+    }
+    .divider-t-right {
+        background-image: url('~@/assets/field_center_divider_T_texture.png'), url('~@/assets/field_center_divider_T_colors.svg');
+        transform: rotate(90deg);
+    }
+    .divider-center {
+        background-image: url('~@/assets/field_center_divider_center_texture.png'), url('~@/assets/field_center_divider_center_colors.svg');
+        transform: rotate(90deg);
+    }
+
     .square {
         min-width: var(--square-width);
         max-width: var(--square-width);
